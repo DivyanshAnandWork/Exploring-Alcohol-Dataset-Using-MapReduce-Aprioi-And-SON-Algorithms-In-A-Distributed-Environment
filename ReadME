@@ -1,0 +1,42 @@
+Make sure to give the path for input and output file path before running below script
+python3 preprocessingScript.py
+
+As an output you will get cleaned_data.csv
+
+Run the hadoop configuration files
+
+Switch to hduser-
+su - hduser
+
+Check environmental variables
+env | grep HADOOP
+env | grep JAVA
+
+Run JPS(Java Process Status) command to check the Hadoop services
+jps
+
+If, they're not running. Use below commands to start them-
+cd /usr/local/hadoop
+sbin/start-dfs.sh
+sbin/start-yarn.sh
+
+After that make a directory with name x22240217
+Inside this directory place all the scripts from the given script directory
+
+Run below commands to run scripts through Hadoop-
+
+python3 RQ2.py -r hadoop cleaned_data.csv | sed 's/\[//; s/\]//' | sed "s/', '/,/g; s/'//g" > output2.csv
+python3 RQ3.py -r hadoop cleaned_data.csv | sed 's/\[//; s/\]//' | sed "s/', '/,/g; s/'//g" > output3.csv
+python3 RQ4.py -r hadoop cleaned_data.csv | sed 's/\[//; s/\]//' | sed "s/', '/,/g; s/'//g" > output4.csv
+python3 AprioriCode.py sample3.csv
+python3 SonCode.py sample3.csv
+
+--------------------------------------------------------------------
+
+They all will generate output files and to run the visualization for each, please run below commands-
+
+python3 visualize_output2.py
+python3 visualize_output3.py
+python3 visualize_output4.py
+python3 aprioriVisualize.py
+python3 sonVisualize.py
